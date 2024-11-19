@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body class="antialiased text-gray-700">
+<div class="container mx-auto h-screen flex overflow-auto" th:inline="javascript">
+    <!-- 사용자 검색 -->
+    <aside class="w-1/4 p-4 bg-gray-100 border-r overflow-y-auto">
+        <h2 class="text-xl font-semibold mb-4">사용자 검색</h2>
+        <div class="flex items-center">
+            <input type="text" id="searchQueryInput" class="flex-grow p-2 border rounded-md" placeholder="이름으로 사용자 검색">
+            <button id="searchButton" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">검색</button>
+        </div>
+        <ul id="searchResults">
+            <!-- 검색 결과는 여기에 동적으로 추가됩니다 -->
+        </ul>
+    </aside>
+
+    <!-- 채팅 창 -->
+    <main id="chatWindow" class="w-3/4 p-4 flex flex-col" style="display:none;">
+        <div class="mb-4 p-4 bg-white border rounded-lg overflow-y-auto" style="flex-grow: 1">
+            <!-- 채팅 메시지가 추가되는 부분 -->
+            <div id='chatMessages' class="space-y-4"></div>
+        </div>
+        <div class="flex items-center">
+            <input type="text" id="messageInput" class="flex-grow p-2 border rounded-md" placeholder="메시지를 입력하세요">
+            <button id="sendButton" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">전송</button>
+        </div>
+    </main>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    var currentUserId = /*[[${userId}]]*/;
+    var currentReceiverId = null;
+    if(currentUserId) {
+        setCookie('userId', currentUserId, 1);
+    } else {
+        currentUserId = getCookie('userId');
+    }
+    $(document).ready(function (){
+        $("#searchButton").click(function(){
+            var searchQuery = $("#searchQueryInput").val();
+            $.ajax({
+                url: "/search-users",
+                type: "GET",
+                data: {
+                    username: searchQuery
+                },
+                success: function(data) {
+                    $("#searchResults").empty();
+                    // 새로운 결과를 추가한다
+                    if (!Array.isArray(data)) {
+                        data = [data];
+                    }
+                    data.forEach(function(user) {
+                        var listItem = $("<li class='userSearchResult'>" + user.username + "</li>");
+                        listItem.click(function(){
+                            // 사용자 검색결과 클릭 이벤트
+                            currentReceiverId = user.id;
+                            openChatWindow();
+                        });
+                        $("#searchResults").append(listItem);
+                    });
+                }
+            });
+        });
+
+        $("#sendButton").click(function() {
+            var messageContent = $("#messageInput").val();
+            addChatMessage(currentUserId, messageContent, false);
+            $("#messageInput").val(''); // 메시지 입력창 초기화
+            $.ajax({
+                url: "/send-message",
+                type: "POST",
+                data: JSON.stringify({
+                    senderId: currentUserId,
+                    receiverId: currentReceiverId,
+                    content: messageContent
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function() {
+                    console.log('Message successfully sent');
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    alert("메시지를 보낼 수 없습니다: " + textStatus);
+                }
+            });
+        });
+    });
+    function openChatWindow() {
+        // First, empty the chat window
+        $("#chatMessages").empty();
+
+        // Ajax request to fetch messages
+        $.ajax({
+            url: "/messages",
+            type: "GET",
+            data: {
+                userId: currentUserId,
+                receiverId: currentReceiverId  // add this line
+            },
+            success(data) {
+                data.forEach((message) => {
+                    let messageBox;
+                    // If the current user is the receiver
+                    if (message.receiverId === currentUserId || message.senderId === currentReceiverId) {
+                        messageBox = $("<div class='p-2 rounded-lg mb-2 " +
+                            "receiverMessage bg-blue-100 float-left clear-both" +
+                            " break-words'><span>" + message.content + "</span></div>");
+                    } else if (message.senderId === currentUserId) {
+                        // If the current user is the sender
+                        messageBox = $("<div class='p-2 rounded-lg mb-2 " +
+                            "senderMessage bg-blue-500 text-white float-right clear-both" +
+                            " break-words'><span>" + message.content + "</span></div>");
+                    }
+                    $('#chatMessages').append(messageBox);
+                    $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
+                });
+            }
+
+        });
+        // show the chat window
+        $("#chatWindow").show();
+    }
+
+    function addChatMessage(senderId, messageContent, isReceiver) {
+        // 채팅 메시지를 채팅창에 추가하는 함수
+        var messageBox = $("<div class='p-2 rounded-lg mb-2 " +
+            (isReceiver ? "receiverMessage bg-blue-100" : "senderMessage bg-blue-500 text-white float-right clear-both") +
+            " break-words'><span>" + messageContent + "</span></div>");
+        $('#chatMessages').append(messageBox);
+        $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight); // 채팅창 스크롤을 최하단으로 이동
+    }
+
+    /*]]>*/
+</script>
+</body>
+</html>

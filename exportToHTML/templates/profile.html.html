@@ -1,0 +1,234 @@
+<html>
+<head>
+<title>profile.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #abb2bf;}
+.s2 { color: #bababa;}
+.s3 { color: #a5c261;}
+.s4 { color: #abb2bf;}
+.s5 { color: #5c6370;}
+.s6 { color: #c678dd;}
+.s7 { color: #61afef;}
+.s8 { color: #98c36c;}
+</style>
+</head>
+<body bgcolor="#282c34">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+profile.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html </span><span class="s2">lang</span><span class="s3">=&quot;ko&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;title&gt;</span><span class="s4">PhotoLeaf - 마이페이지</span><span class="s0">&lt;/title&gt;</span>
+    <span class="s0">&lt;link </span><span class="s2">href</span><span class="s3">=&quot;https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css&quot; </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;link </span><span class="s2">href</span><span class="s3">=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;style&gt;</span>
+        <span class="s1">.</span><span class="s0">material-icons</span><span class="s1">.</span><span class="s0">liked </span><span class="s1">{</span>
+            <span class="s2">color</span><span class="s4">: </span><span class="s3">red</span><span class="s1">;</span>
+        <span class="s1">}</span>
+
+        <span class="s1">.</span><span class="s0">material-icons</span><span class="s1">.</span><span class="s0">not-liked </span><span class="s1">{</span>
+            <span class="s2">color</span><span class="s4">: </span><span class="s3">black</span><span class="s1">;</span>
+        <span class="s1">}</span>
+    <span class="s0">&lt;/style&gt;</span>
+    <span class="s0">&lt;script </span><span class="s2">src</span><span class="s3">=&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;</span><span class="s0">&gt;&lt;/script&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body </span><span class="s2">class</span><span class="s3">=&quot;bg-gray-200&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;container mx-auto&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;header </span><span class="s2">class</span><span class="s3">=&quot;w-full flex justify-between p-6 bg-blue-500 text-white&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;h1 </span><span class="s2">class</span><span class="s3">=&quot;font-semibold text-2xl&quot;</span><span class="s0">&gt;</span><span class="s4">PhotoLeaf</span><span class="s0">&lt;/h1&gt;</span>
+        <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;/home&quot; </span><span class="s2">class</span><span class="s3">=&quot;px-4 py-2 font-semibold rounded hover:bg-blue-700&quot;</span><span class="s0">&gt;</span><span class="s4">홈</span><span class="s0">&lt;/a&gt;</span>
+    <span class="s0">&lt;/header&gt;</span>
+
+    <span class="s0">&lt;main </span><span class="s2">class</span><span class="s3">=&quot;flex flex-col items-center mt-10&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;w-full max-w-2xl bg-white p-10 rounded-lg shadow-md&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex items-center space-x-6 mb-8&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;img </span><span class="s2">src</span><span class="s3">=&quot;profile-placeholder.jpg&quot; </span><span class="s2">alt</span><span class="s3">=&quot;프로필 사진&quot; </span><span class="s2">class</span><span class="s3">=&quot;w-24 h-24 rounded-full&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div&gt;</span>
+                    <span class="s0">&lt;h2 </span><span class="s2">class</span><span class="s3">=&quot;text-2xl font-bold&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;span </span><span class="s2">th:text</span><span class="s3">=&quot;${nickname}&quot;</span><span class="s0">&gt;&lt;/span&gt; </span><span class="s5">&lt;!-- show nickname instead of username --&gt;</span>
+                        <span class="s5">&lt;!-- Add a wheel icon here --&gt;</span>
+                        <span class="s0">&lt;i </span><span class="s2">class</span><span class="s3">=&quot;material-icons setting&quot; </span><span class="s2">style</span><span class="s3">=&quot;</span><span class="s2">cursor</span><span class="s4">: </span><span class="s3">pointer</span><span class="s1">;</span><span class="s3">&quot;</span><span class="s0">&gt;</span><span class="s4">settings</span><span class="s0">&lt;/i&gt;</span>
+                    <span class="s0">&lt;/h2&gt;</span>
+                    <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600&quot;</span><span class="s0">&gt;</span><span class="s4">팔로우</span><span class="s0">&lt;/button&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;username&quot; </span><span class="s2">style</span><span class="s3">=&quot;</span><span class="s2">display</span><span class="s4">: </span><span class="s3">none</span><span class="s1">;</span><span class="s3">&quot;</span><span class="s0">&gt;</span><span class="s4">[[${username}]]</span><span class="s0">&lt;/div&gt;</span>
+
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex justify-between mb-4&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;text-lg font-semibold&quot;</span><span class="s0">&gt;</span><span class="s4">팔로잉 </span><span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;text-gray-500&quot;</span><span class="s0">&gt;</span><span class="s4">100</span><span class="s0">&lt;/span&gt;&lt;/div&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;text-lg font-semibold&quot;</span><span class="s0">&gt;</span><span class="s4">팔로워 </span><span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;text-gray-500&quot;</span><span class="s0">&gt;</span><span class="s4">200</span><span class="s0">&lt;/span&gt;&lt;/div&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+
+            <span class="s5">&lt;!-- Adding Tabs --&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;tabs flex mt-6&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;button </span><span class="s2">id</span><span class="s3">=&quot;posts-tab&quot; </span><span class="s2">class</span><span class="s3">=&quot;tab-button bg-blue-500 text-white py-2 px-4 rounded-tl-lg rounded-tr-lg mr-2&quot;</span><span class="s0">&gt;</span>
+                    <span class="s4">게시물</span>
+                <span class="s0">&lt;/button&gt;</span>
+                <span class="s0">&lt;button </span><span class="s2">id</span><span class="s3">=&quot;likes-tab&quot; </span><span class="s2">class</span><span class="s3">=&quot;tab-button bg-gray-200 text-gray-600 py-2 px-4 rounded-tl-lg rounded-tr-lg&quot;</span><span class="s0">&gt;</span>
+                    <span class="s4">좋아요</span>
+                <span class="s0">&lt;/button&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+
+            <span class="s5">&lt;!-- Posts Section --&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;post-section&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;form </span><span class="s2">th:action</span><span class="s3">=&quot;@{/post}&quot; </span><span class="s2">th:object</span><span class="s3">=&quot;${postForm}&quot; </span><span class="s2">method</span><span class="s3">=&quot;post&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;textarea </span><span class="s2">class</span><span class="s3">=&quot;w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none&quot; </span><span class="s2">rows</span><span class="s3">=&quot;4&quot; </span><span class="s2">placeholder</span><span class="s3">=&quot;여기에 게시물을 작성하세요&quot; </span><span class="s2">th:field</span><span class="s3">=&quot;*{content}&quot;</span><span class="s0">&gt;&lt;/textarea&gt;</span>
+                <span class="s0">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;submit&quot; </span><span class="s2">class</span><span class="s3">=&quot;mt-3 px-4 py-2 text-sm font-semibold rounded bg-blue-500 text-white hover:bg-blue-700&quot;</span><span class="s0">&gt;</span><span class="s4">게시하기</span><span class="s0">&lt;/button&gt;</span>
+            <span class="s0">&lt;/form&gt;</span>
+                <span class="s0">&lt;div&gt;</span>
+                    <span class="s0">&lt;h3 </span><span class="s2">class</span><span class="s3">=&quot;text-lg font-semibold mt-8 mb-2&quot;</span><span class="s0">&gt;</span><span class="s4">게시글</span><span class="s0">&lt;/h3&gt;</span>
+                    <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;space-y-4&quot;</span><span class="s0">&gt;</span>
+                        <span class="s5">&lt;!-- Each post --&gt;</span>
+                        <span class="s0">&lt;div </span><span class="s2">th:each</span><span class="s3">=&quot;post : ${posts}&quot; </span><span class="s2">th:class</span><span class="s3">=&quot;${post.liked ? 'liked-post' : ''}&quot; </span><span class="s2">class</span><span class="s3">=&quot;border rounded p-4&quot;</span><span class="s0">&gt;</span>
+                            <span class="s5">&lt;!-- Like button --&gt;</span>
+                            <span class="s0">&lt;form </span><span class="s2">th:action</span><span class="s3">=&quot;@{/post/toggle-like/{id}(id=${post.id})}&quot; </span><span class="s2">method</span><span class="s3">=&quot;post&quot; </span><span class="s2">class</span><span class="s3">=&quot;like-form inline-block&quot;</span><span class="s0">&gt;</span>
+                                <span class="s0">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;hidden&quot; </span><span class="s2">name</span><span class="s3">=&quot;id&quot; </span><span class="s2">th:value</span><span class="s3">=&quot;${post.id}&quot; </span><span class="s0">/&gt;</span>
+                                <span class="s0">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;submit&quot; </span><span class="s2">class</span><span class="s3">=&quot;like-button&quot;</span><span class="s0">&gt;</span>
+                                    <span class="s0">&lt;i </span><span class="s2">class</span><span class="s3">=&quot;material-icons&quot; </span><span class="s2">th:style</span><span class="s3">=&quot;${post.liked} ? 'color: red' : 'color: black'&quot;</span><span class="s0">&gt;</span><span class="s4">thumb_up</span><span class="s0">&lt;/i&gt;</span>
+                                <span class="s0">&lt;/button&gt;</span>
+                            <span class="s0">&lt;/form&gt;</span>
+                            <span class="s5">&lt;!-- Delete button --&gt;</span>
+                            <span class="s0">&lt;form </span><span class="s2">th:action</span><span class="s3">=&quot;@{/post/delete/{id}(id=${post.id})}&quot; </span><span class="s2">method</span><span class="s3">=&quot;post&quot; </span><span class="s2">class</span><span class="s3">=&quot;inline-block ml-2&quot;</span><span class="s0">&gt;</span>
+                                <span class="s0">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;submit&quot; </span><span class="s2">class</span><span class="s3">=&quot;btn btn-danger&quot;</span><span class="s0">&gt;</span>
+                                    <span class="s0">&lt;i </span><span class="s2">class</span><span class="s3">=&quot;material-icons&quot;</span><span class="s0">&gt;</span><span class="s4">delete</span><span class="s0">&lt;/i&gt;</span>
+                                <span class="s0">&lt;/button&gt;</span>
+                            <span class="s0">&lt;/form&gt;</span>
+                            <span class="s5">&lt;!-- Post content --&gt;</span>
+                            <span class="s0">&lt;p </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${post.content}&quot;</span><span class="s0">&gt;&lt;/p&gt;</span>
+
+                            <span class="s5">&lt;!-- Post author's username --&gt;</span>
+                            <span class="s0">&lt;small </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${post.username}&quot;</span><span class="s0">&gt;&lt;/small&gt;</span>
+
+                            <span class="s5">&lt;!-- Time since the post was made (processed in the server) --&gt;</span>
+                            <span class="s0">&lt;small </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${post.difference}&quot;</span><span class="s0">&gt;&lt;/small&gt;</span>
+
+                            <span class="s5">&lt;!-- Post date and time --&gt;</span>
+                            <span class="s0">&lt;small </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${#temporals.format(post.date, 'yyyy-MM-dd HH:mm')}&quot;</span><span class="s0">&gt;&lt;/small&gt;</span>
+                        <span class="s0">&lt;/div&gt;</span>
+                    <span class="s0">&lt;/div&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+
+            <span class="s5">&lt;!-- Likes Section (Initially hidden)--&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">id</span><span class="s3">=&quot;like-section&quot; </span><span class="s2">style</span><span class="s3">=&quot;</span><span class="s2">display</span><span class="s4">: </span><span class="s3">none</span><span class="s1">;</span><span class="s3">&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">th:each</span><span class="s3">=&quot;post : ${likedPosts}&quot; </span><span class="s2">th:class</span><span class="s3">=&quot;${post.liked ? 'liked-post' : 'post'}&quot; </span><span class="s2">class</span><span class="s3">=&quot;border rounded p-4&quot;</span><span class="s0">&gt;</span>
+                    <span class="s5">&lt;!-- Like button --&gt;</span>
+                    <span class="s0">&lt;form </span><span class="s2">th:action</span><span class="s3">=&quot;@{/post/toggle-like/{id}(id=${post.id})}&quot; </span><span class="s2">method</span><span class="s3">=&quot;post&quot; </span><span class="s2">class</span><span class="s3">=&quot;like-form inline-block&quot;</span><span class="s0">&gt;</span>
+                        <span class="s0">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;hidden&quot; </span><span class="s2">name</span><span class="s3">=&quot;id&quot; </span><span class="s2">th:value</span><span class="s3">=&quot;${post.id}&quot; </span><span class="s0">/&gt;</span>
+                        <span class="s0">&lt;button </span><span class="s2">type</span><span class="s3">=&quot;submit&quot; </span><span class="s2">class</span><span class="s3">=&quot;like-button&quot; </span><span class="s2">th:class</span><span class="s3">=&quot;${post.liked ? 'liked' : 'not-liked'}&quot;</span><span class="s0">&gt;</span>
+                            <span class="s0">&lt;i </span><span class="s2">class</span><span class="s3">=&quot;material-icons&quot; </span><span class="s2">th:style</span><span class="s3">=&quot;${post.liked} ? 'color: red' : 'color: black'&quot;</span><span class="s0">&gt;</span><span class="s4">thumb_up</span><span class="s0">&lt;/i&gt;</span>
+                        <span class="s0">&lt;/button&gt;</span>
+                    <span class="s0">&lt;/form&gt;</span>
+                    <span class="s5">&lt;!-- Post content --&gt;</span>
+                    <span class="s0">&lt;p </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${post.content}&quot;</span><span class="s0">&gt;&lt;/p&gt;</span>
+
+                    <span class="s5">&lt;!-- Post author's username --&gt;</span>
+                    <span class="s0">&lt;small </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${post.username}&quot;</span><span class="s0">&gt;&lt;/small&gt;</span>
+
+                    <span class="s5">&lt;!-- Time since the post was made (processed in the server) --&gt;</span>
+                    <span class="s0">&lt;small </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${post.difference}&quot;</span><span class="s0">&gt;&lt;/small&gt;</span>
+
+                    <span class="s5">&lt;!-- Post date and time --&gt;</span>
+                    <span class="s0">&lt;small </span><span class="s2">class</span><span class="s3">=&quot;text-grey-700&quot; </span><span class="s2">th:text</span><span class="s3">=&quot;${#temporals.format(post.date, 'yyyy-MM-dd HH:mm')}&quot;</span><span class="s0">&gt;&lt;/small&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+
+        <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/main&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+<span class="s0">&lt;script&gt;</span>
+    <span class="s1">$(document).ready(</span><span class="s6">function</span><span class="s1">() {</span>
+        <span class="s6">function </span><span class="s1">loadLikesTab() {</span>
+            <span class="s1">$.ajax({</span>
+                <span class="s1">url</span><span class="s7">: </span><span class="s8">'/profile/liked-posts/' </span><span class="s7">+ </span><span class="s1">$(</span><span class="s8">'#username'</span><span class="s1">).text(),</span>
+                <span class="s1">type</span><span class="s7">: </span><span class="s8">'GET'</span><span class="s1">,</span>
+                <span class="s1">success</span><span class="s7">: </span><span class="s6">function</span><span class="s1">(data) {</span>
+                    <span class="s1">$(</span><span class="s8">'#like-section'</span><span class="s1">).html(data);</span>
+                    <span class="s1">attachLikeFormSubmitHandler();</span>
+                <span class="s1">}</span>
+            <span class="s1">});</span>
+        <span class="s1">}</span>
+
+        <span class="s6">function </span><span class="s1">updateLikeButton(likeButton, liked) {</span>
+            <span class="s1">likeButton.css(</span><span class="s8">'color'</span><span class="s1">, liked </span><span class="s7">? </span><span class="s8">'red' </span><span class="s7">: </span><span class="s8">'black'</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s6">function </span><span class="s1">attachLikeFormSubmitHandler() {</span>
+            <span class="s1">$(</span><span class="s8">'.like-form'</span><span class="s1">).off(</span><span class="s8">'submit'</span><span class="s1">).on(</span><span class="s8">'submit'</span><span class="s1">, </span><span class="s6">function </span><span class="s1">(event) {</span>
+                <span class="s1">event.preventDefault();</span>
+                <span class="s6">const </span><span class="s1">form </span><span class="s7">= </span><span class="s1">$(</span><span class="s6">this</span><span class="s1">);</span>
+                <span class="s6">const </span><span class="s1">likeButton </span><span class="s7">= </span><span class="s1">form.find(</span><span class="s8">'.like-button .material-icons'</span><span class="s1">);</span>
+                <span class="s6">const </span><span class="s1">postId </span><span class="s7">= </span><span class="s1">form.find(</span><span class="s8">'input[name=id]'</span><span class="s1">).val();</span>
+                <span class="s1">$.ajax({</span>
+                    <span class="s1">url</span><span class="s7">: </span><span class="s8">'/post/toggle-like/' </span><span class="s7">+ </span><span class="s1">postId,</span>
+                    <span class="s1">method</span><span class="s7">: </span><span class="s8">&quot;POST&quot;</span><span class="s1">,</span>
+                    <span class="s1">success</span><span class="s7">: </span><span class="s6">function</span><span class="s1">(response) {</span>
+                        <span class="s1">console.log(response);</span>
+                        <span class="s1">updateLikeButton(likeButton, response.liked);</span>
+                        <span class="s6">if </span><span class="s1">(</span><span class="s7">!</span><span class="s1">response.liked </span><span class="s7">&amp;&amp; </span><span class="s1">$(</span><span class="s8">'#like-section'</span><span class="s1">).is(</span><span class="s8">':visible'</span><span class="s1">)) {</span>
+                            <span class="s1">form.parents(</span><span class="s8">'.post'</span><span class="s1">).remove();</span>
+                        <span class="s1">}</span>
+                        <span class="s1">loadLikesTab();</span>
+                    <span class="s1">},</span>
+                    <span class="s1">error</span><span class="s7">: </span><span class="s6">function</span><span class="s1">(error) {</span>
+                        <span class="s1">console.error(error);</span>
+                        <span class="s1">alert(</span><span class="s8">'An error occurred while toggling like.'</span><span class="s1">);</span>
+                    <span class="s1">}</span>
+                <span class="s1">});</span>
+            <span class="s1">});</span>
+        <span class="s1">}</span>
+
+        <span class="s6">function </span><span class="s1">updateNicknameInDom(nickname) {</span>
+            <span class="s1">$(</span><span class="s8">'.text-2xl &gt; span'</span><span class="s1">).text(nickname);</span>
+        <span class="s1">}</span>
+
+        <span class="s6">function </span><span class="s1">attachNicknameUpdateHandler() {</span>
+            <span class="s1">$(</span><span class="s8">'.setting'</span><span class="s1">).click(</span><span class="s6">function</span><span class="s1">() {</span>
+                <span class="s6">const </span><span class="s1">nickname </span><span class="s7">= </span><span class="s1">prompt(</span><span class="s8">&quot;Enter new nickname: &quot;</span><span class="s1">);</span>
+                <span class="s6">if</span><span class="s1">(nickname) {</span>
+                    <span class="s1">$.ajax({</span>
+                        <span class="s1">url</span><span class="s7">: </span><span class="s8">&quot;/username/update&quot;</span><span class="s1">,</span>
+                        <span class="s1">type</span><span class="s7">: </span><span class="s8">&quot;POST&quot;</span><span class="s1">,</span>
+                        <span class="s1">data</span><span class="s7">: </span><span class="s1">JSON.stringify({ nickname</span><span class="s7">: </span><span class="s1">nickname }), </span><span class="s5">// Convert the request body to a JSON string</span>
+                        <span class="s1">contentType</span><span class="s7">: </span><span class="s8">'application/json'</span><span class="s1">,  </span><span class="s5">// Set the 'Content-Type' header</span>
+                        <span class="s1">success</span><span class="s7">: </span><span class="s6">function</span><span class="s1">() {</span>
+                            <span class="s5">// update the nickname in DOM</span>
+                            <span class="s1">updateNicknameInDom(nickname);</span>
+                        <span class="s1">},</span>
+                        <span class="s1">error</span><span class="s7">: </span><span class="s6">function</span><span class="s1">() {</span>
+                            <span class="s1">alert(</span><span class="s8">&quot;An error occurred while updating the nickname.&quot;</span><span class="s1">);</span>
+                        <span class="s1">}</span>
+                    <span class="s1">});</span>
+                <span class="s1">}</span>
+            <span class="s1">});</span>
+        <span class="s1">}</span>
+
+        <span class="s1">$(</span><span class="s8">'#posts-tab'</span><span class="s1">).click(</span><span class="s6">function</span><span class="s1">() {</span>
+            <span class="s1">$(</span><span class="s8">'#post-section'</span><span class="s1">).show();</span>
+            <span class="s1">$(</span><span class="s8">'#like-section'</span><span class="s1">).hide();</span>
+            <span class="s1">$(</span><span class="s8">'#posts-tab'</span><span class="s1">).addClass(</span><span class="s8">'bg-blue-500 text-white'</span><span class="s1">);</span>
+            <span class="s1">$(</span><span class="s8">'#likes-tab'</span><span class="s1">).removeClass(</span><span class="s8">'bg-blue-500 text-white'</span><span class="s1">);</span>
+        <span class="s1">});</span>
+
+        <span class="s1">$(</span><span class="s8">'#likes-tab'</span><span class="s1">).click(</span><span class="s6">function</span><span class="s1">() {</span>
+            <span class="s1">$(</span><span class="s8">'#like-section'</span><span class="s1">).show();</span>
+            <span class="s1">$(</span><span class="s8">'#post-section'</span><span class="s1">).hide();</span>
+            <span class="s1">$(</span><span class="s8">'#likes-tab'</span><span class="s1">).addClass(</span><span class="s8">'bg-blue-500 text-white'</span><span class="s1">);</span>
+            <span class="s1">$(</span><span class="s8">'#posts-tab'</span><span class="s1">).removeClass(</span><span class="s8">'bg-blue-500 text-white'</span><span class="s1">);</span>
+        <span class="s1">});</span>
+
+        <span class="s1">attachLikeFormSubmitHandler();</span>
+        <span class="s1">attachNicknameUpdateHandler();</span>
+    <span class="s1">});</span>
+<span class="s0">&lt;/script&gt;</span>
+<span class="s0">&lt;/body&gt;</span>
+
+<span class="s0">&lt;/html&gt;</span></pre>
+</body>
+</html>

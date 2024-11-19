@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Photoleaf_chatbox.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #abb2bf;}
+.s2 { color: #bababa;}
+.s3 { color: #a5c261;}
+.s4 { color: #abb2bf;}
+.s5 { color: #5c6370;}
+</style>
+</head>
+<body bgcolor="#282c34">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Photoleaf_chatbox.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html </span><span class="s2">lang</span><span class="s3">=&quot;ko&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;title&gt;</span><span class="s4">PhotoLeaf - 쪽지</span><span class="s0">&lt;/title&gt;</span>
+    <span class="s0">&lt;link </span><span class="s2">href</span><span class="s3">=&quot;https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css&quot; </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body </span><span class="s2">class</span><span class="s3">=&quot;antialiased text-gray-700&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;container mx-auto h-screen flex&quot;</span><span class="s0">&gt;</span>
+    <span class="s5">&lt;!-- 사용자 목록 --&gt;</span>
+    <span class="s0">&lt;aside </span><span class="s2">class</span><span class="s3">=&quot;w-1/4 p-4 bg-gray-100 border-r&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;h2 </span><span class="s2">class</span><span class="s3">=&quot;text-xl font-semibold mb-4&quot;</span><span class="s0">&gt;</span><span class="s4">쪽지</span><span class="s0">&lt;/h2&gt;</span>
+        <span class="s0">&lt;ul&gt;</span>
+            <span class="s0">&lt;li </span><span class="s2">class</span><span class="s3">=&quot;p-2 border-b cursor-pointer hover:bg-gray-200&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex items-center space-x-2&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;img </span><span class="s2">src</span><span class="s3">=&quot;profile-placeholder.jpg&quot; </span><span class="s2">alt</span><span class="s3">=&quot;프로필 사진&quot; </span><span class="s2">class</span><span class="s3">=&quot;w-10 h-10 rounded-full&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;font-medium&quot;</span><span class="s0">&gt;</span><span class="s4">사용자 1</span><span class="s0">&lt;/span&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;/li&gt;</span>
+            <span class="s0">&lt;li </span><span class="s2">class</span><span class="s3">=&quot;p-2 border-b cursor-pointer hover:bg-gray-200&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex items-center space-x-2&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;img </span><span class="s2">src</span><span class="s3">=&quot;profile-placeholder.jpg&quot; </span><span class="s2">alt</span><span class="s3">=&quot;프로필 사진&quot; </span><span class="s2">class</span><span class="s3">=&quot;w-10 h-10 rounded-full&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;font-medium&quot;</span><span class="s0">&gt;</span><span class="s4">사용자 2</span><span class="s0">&lt;/span&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;/li&gt;</span>
+            <span class="s5">&lt;!-- 추가 사용자 목록 --&gt;</span>
+        <span class="s0">&lt;/ul&gt;</span>
+    <span class="s0">&lt;/aside&gt;</span>
+
+    <span class="s5">&lt;!-- 채팅 창 --&gt;</span>
+    <span class="s0">&lt;main </span><span class="s2">class</span><span class="s3">=&quot;w-3/4 p-4 flex flex-col&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex-grow overflow-y-auto p-4 bg-white border rounded-lg mb-4&quot;</span><span class="s0">&gt;</span>
+            <span class="s5">&lt;!-- 채팅 메시지 --&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;mb-4&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex items-center mb-2&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;img </span><span class="s2">src</span><span class="s3">=&quot;profile-placeholder.jpg&quot; </span><span class="s2">alt</span><span class="s3">=&quot;프로필 사진&quot; </span><span class="s2">class</span><span class="s3">=&quot;w-8 h-8 rounded-full&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;ml-2 font-semibold&quot;</span><span class="s0">&gt;</span><span class="s4">사용자 1</span><span class="s0">&lt;/span&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+                <span class="s0">&lt;p </span><span class="s2">class</span><span class="s3">=&quot;bg-gray-200 p-2 rounded-md&quot;</span><span class="s0">&gt;</span><span class="s4">안녕하세요!</span><span class="s0">&lt;/p&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;mb-4 text-right&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex items-center justify-end mb-2&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;mr-2 font-semibold&quot;</span><span class="s0">&gt;</span><span class="s4">나</span><span class="s0">&lt;/span&gt;</span>
+                    <span class="s0">&lt;img </span><span class="s2">src</span><span class="s3">=&quot;profile-placeholder.jpg&quot; </span><span class="s2">alt</span><span class="s3">=&quot;프로필 사진&quot; </span><span class="s2">class</span><span class="s3">=&quot;w-8 h-8 rounded-full&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;/div&gt;</span>
+                <span class="s0">&lt;p </span><span class="s2">class</span><span class="s3">=&quot;bg-blue-500 text-white p-2 rounded-md inline-block&quot;</span><span class="s0">&gt;</span><span class="s4">안녕하세요! 사용자 1님.</span><span class="s0">&lt;/p&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s5">&lt;!-- 추가 채팅 메시지 --&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;flex items-center&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;input </span><span class="s2">type</span><span class="s3">=&quot;text&quot; </span><span class="s2">class</span><span class="s3">=&quot;flex-grow p-2 border rounded-md&quot; </span><span class="s2">placeholder</span><span class="s3">=&quot;메시지를 입력하세요&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;ml-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600&quot;</span><span class="s0">&gt;</span><span class="s4">전송</span><span class="s0">&lt;/button&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/main&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+<span class="s0">&lt;/body&gt;</span>
+<span class="s0">&lt;/html&gt;</span></pre>
+</body>
+</html>

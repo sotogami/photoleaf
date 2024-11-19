@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>PhotoLeaf - 마이페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .material-icons.liked {
+            color: red;
+        }
+
+        .material-icons.not-liked {
+            color: black;
+        }
+        #imgContainer:hover {
+            background-color:grey;
+            opacity:0.5
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body class="bg-gray-200">
+<div class="container mx-auto">
+    <header class="w-full flex justify-between p-6 bg-blue-500 text-white">
+        <h1 class="font-semibold text-2xl">PhotoLeaf</h1>
+        <a href="/home" class="px-4 py-2 font-semibold rounded hover:bg-blue-700">홈</a>
+    </header>
+
+    <main class="flex flex-col items-center mt-10">
+        <div class="w-full max-w-2xl bg-white p-10 rounded-lg shadow-md">
+            <div class="flex flex-col items-center space-y-6 mb-8">
+                <div id="imgContainer" style="position:relative; cursor: pointer;">
+                    <input type="file" id="imgUpload" style="display:none;">
+                    <img id="profile_img" th:src="@{'/user/' + ${username} + '/image'}" alt="Profile Image" class="w-24 h-24 rounded-full">
+                    <div class="text-black text-center absolute" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display:none" id="uploadText">프로필 사진 변경</div>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold">
+                        <span th:text="${nickname}"></span> <!-- show nickname instead of username -->
+                        <!-- Add a wheel icon here -->
+                        <i class="material-icons setting" style="cursor: pointer;">settings</i>
+                    </h2>
+                    <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 follow-button displayText">팔로우</button>
+                </div>
+            </div>
+
+            <div id="username" style="display: none;">[[${username}]]</div>
+            <div id="loggedInUsername" style="display: none;">[[${loggedInUsername}]]</div>
+
+            <div class="flex justify-between mb-4">
+                <div class="text-lg font-semibold">팔로잉 <span class="text-gray-500" th:text="${followingCount}"></span></div>
+                <div class="text-lg font-semibold">팔로워 <span class="text-gray-500" th:text="${followerCount}"></span></div>
+            </div>
+
+            <!-- Adding Tabs -->
+            <div class="tabs flex mt-6">
+                <button id="posts-tab" class="tab-button bg-blue-500 text-white py-2 px-4 rounded-tl-lg rounded-tr-lg mr-2">
+                    게시물
+                </button>
+                <button id="likes-tab" class="tab-button bg-gray-200 text-gray-600 py-2 px-4 rounded-tl-lg rounded-tr-lg">
+                    좋아요
+                </button>
+            </div>
+
+            <!-- Posts Section -->
+            <div id="post-section">
+                <div th:if="${loggedInUsername == username}">
+                    <form id="post-form" th:action="@{/post}" method="POST" enctype="multipart/form-data">
+                        <textarea class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" rows="4" id="content" name="content" placeholder="여기에 게시물을 작성하세요"></textarea>
+                        <!-- Upload Photo Icon Button -->
+                        <div class="flex items-center">
+                            <input type="file" id="image" name="image" style="display:none;">
+                            <label for="image" class="cursor-pointer">
+                                <span class="material-icons text-gray-400 text-4xl hover:text-gray-700">add_photo_alternate</span>
+                            </label>
+                            <p id="fileName" class="ml-2"></p>
+                        </div>
+                        <button type="submit" class="mt-3 px-4 py-2 text-sm font-semibold rounded bg-blue-500 text-white hover:bg-blue-700">게시하기</button>
+                    </form>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mt-8 mb-2">게시글</h3>
+                    <div class="space-y-4">
+                        <!-- Each post -->
+                        <div th:id="'post-' + ${post.id}" th:data-userid="${post.userId}" th:each="post : ${posts}" th:class="${post.liked ? 'liked-post' : ''}">
+                            <div class="border rounded p-4">
+                                <!-- Add link to User's profile -->
+                                <span class="flex items-center mb-4">
+                                <!-- Link to User's profile on image -->
+                                <a th:href="@{/profile/{username}(username=${userRepository.findById(post.userId).orElseThrow().getUsername()})}">
+                                    <img th:src="@{'/user/' + ${userRepository.findById(post.userId).orElseThrow().getUsername()} + '/image'}" class="profilePicClass w-12 h-12 rounded-full" alt="User profile pic"/>
+                                </a>
+                                    <!-- Link to User's profile on nickname -->
+                                <a th:href="@{/profile/{username}(username=${userRepository.findById(post.userId).orElseThrow().getUsername()})}">
+                                    <span class="ml-4 text-gray-700 font-semibold text-xl" th:if="${post.nickname != null}" th:text="${post.nickname}"></span>
+                                </a>
+                                </span>
+                                <!-- Post details and control at same row on bottom right corner -->
+                                <div class="flex justify-between items-end w-full">
+                                    <div>
+                                        <!-- Post content -->
+                                        <p class="text-grey-700 text-lg" th:text="${post.content}"></p>
+                                        <!-- Post Image -->
+                                        <img th:if="${post.image}" th:src="@{'/images/posts/' + ${post.image}}" alt="Post Image" class="w-60 h-60 mt-3">
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <!-- Like button -->
+                                        <div class="post" th:id="'post-' + ${post.id}" th:data-id="${post.id}">
+                                            <!-- Post content and other elements -->
+                                            <div class="like-counter-div">
+                                                <i class="material-icons like-button" th:style="${post.liked} ? 'color: red' : 'color: black'">thumb_up</i>
+                                                <p class="likes-count" th:text="${post.getLikesCount()}"></p>
+                                            </div>
+                                        </div>
+                                        <!-- Delete button -->
+                                            <div th:if="${loggedInUsername == username}">
+                                                <form class="inline-block ml-2 delete-post-form" th:data-post-id="${post.id}">
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!-- Time since the post was made (processed in the server) -->
+                                <small class="text-grey-700" th:text="${post.difference}"></small>
+                                <!-- Post date and time -->
+                                <small class="text-grey-700" th:text="${#temporals.format(post.date, 'yyyy-MM-dd HH:mm')}"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Likes Section (Initially hidden)-->
+            <div id="like-section" style="display: none;">
+                <div>
+                    <h3 class="text-lg font-semibold mt-8 mb-2">좋아요 한 게시글</h3>
+                    <div class="space-y-4">
+                        <!-- Each liked post -->
+                        <div th:id="'post-' + ${post.id}" th:each="post : ${likedPosts}" th:class="${post.liked ? 'liked-post' : 'post'}">
+                            <div class="border rounded p-4">
+                                <!-- Add link to User's profile -->
+                                <span class="flex items-center mb-4">
+                        <!-- Link to User's profile on image -->
+                        <a th:href="@{/profile/{username}(username=${userRepository.findById(post.userId).orElseThrow().getUsername()})}">
+                            <img th:src="@{'/user/' + ${userRepository.findById(post.userId).orElseThrow().getUsername()} + '/image'}" class="profilePicClass w-12 h-12 rounded-full" alt="User profile pic"/>
+                        </a>
+                                    <!-- Link to User's profile on nickname -->
+                        <a th:href="@{/profile/{username}(username=${userRepository.findById(post.userId).orElseThrow().getUsername()})}">
+                            <span class="ml-4 text-gray-700 font-semibold text-xl" th:if="${post.nickname != null}" th:text="${post.nickname}"></span>
+                        </a>
+                    </span>
+                                <!-- Post details and control at same row on bottom right corner -->
+                                <div class="flex justify-between items-end w-full">
+                                    <div>
+                                        <!-- Post content -->
+                                        <p class="text-grey-700 text-lg" th:text="${post.content}"></p>
+                                        <!-- Post Image -->
+                                        <img th:if="${post.image}" th:src="@{'/images/posts/' + ${post.image}}" alt="Post Image" class="w-60 h-60 mt-3">
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                        <!-- Like button -->
+                                        <div class="post" th:id="'post-' + ${post.id}" th:data-id="${post.id}">
+                                            <!-- Post content and other elements -->
+                                            <div class="like-counter-div">
+                                                <i class="material-icons like-button" th:style="${post.liked} ? 'color: red' : 'color: black'">thumb_up</i>
+                                                <p class="likes-count" th:text="${post.getLikesCount()}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Time since the post was made (processed in the server) -->
+                                <small class="text-grey-700" th:text="${post.difference}"></small>
+                                <!-- Post date and time -->
+                                <small class="text-grey-700" th:text="${#temporals.format(post.date, 'yyyy-MM-dd HH:mm')}"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+<script>
+    $(document).ready(function() {
+        let loggedInUsername = $('#loggedInUsername').text();
+        let profileUsername = $('#username').text();
+        let isUsersOwnPage = loggedInUsername === profileUsername;
+        var isAuthenticated = [[${#authentication.name != null}]];
+        if (!isAuthenticated) {
+            alert("로그인을 해주세요.");
+            window.location.href = "/login";
+        }
+
+        if(loggedInUsername === profileUsername){
+            $(".follow-button").css("display", "none");
+        } else {
+            $(".follow-button").css("display", "inline-block");
+        }
+        if (isUsersOwnPage) {
+            $('#imgContainer').on('mouseenter', function() {
+                $('#uploadText').show();
+            }).on('mouseleave', function() {
+                $('#uploadText').hide();
+            }).on('click', function() {
+                $('#imgUpload').trigger('click.once');
+            });
+
+            $('#imgUpload').one('click.once', function() {
+                console.log('imgUpload click.once event triggered');
+            }).on('change', function() {
+                console.log('imgUpload change event triggered');
+                let formData = new FormData();
+                formData.append("file", this.files[0]);
+
+                $.ajax({
+                    url: "/profile/upload-profile-pic",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        alert("프로필 사진이 성공적으로 업데이트되었습니다.");
+                        location.reload();
+                    },
+                    error: function(error) {
+                        alert("프로필 사진 업데이트 중 오류가 발생했습니다.");
+                    }
+                });
+            });
+        }
+        function loadLikesTab() {
+            $.ajax({
+                url: '/profile/liked-posts/' + $('#username').text(),
+                type: 'GET',
+                success: function(data) {
+                    $('#like-section').html(data);
+                    attachLikeFormSubmitHandler();
+                }
+            });
+        }
+
+        function updateLikeButton(likeButton, liked) {
+            likeButton.css('color', liked ? 'red' : 'black');
+        }
+        function onDeletePost(event, postId) {
+            event.preventDefault();
+            $.ajax({
+                url: '/post/delete/' + postId,
+                type: 'POST',
+                success: function() {
+                    // 성공적으로 게시물이 삭제되면, 해당 게시물을 DOM에서 제거합니다.
+                    $('#' + postId).remove();
+                },
+                error: function() {
+                    alert('게시글을 삭제하는 과정에서 에러가 발생했습니다.');
+                }
+            });
+        }
+
+        function updateFollowButton() {
+            var username = $('#username').text();
+            $.ajax({
+                url: "/user/follow-status/" + username,
+                type: "GET",
+                success: function(following) {
+                    if (following) {
+                        $('.follow-button').text('언팔로우');
+                    } else {
+                        $('.follow-button').text('팔로우');
+                    }
+                },
+                error: function() {
+                    alert('팔로우 상태를 가져오는데 문제가 생겼습니다.');
+                }
+            });
+        }
+
+
+        function attachLikeFormSubmitHandler() {
+            $('.like-form').off('submit').on('submit', function (event) {
+                event.preventDefault();
+                const form = $(this);
+                const likeButton = form.find('.like-button .material-icons');
+                const postId = form.find('input[name=id]').val();
+                $.ajax({
+                    url: '/post/toggle-like/' + postId,
+                    method: "POST",
+                    success: function(response) {
+                        console.log(response);
+                        updateLikeButton(likeButton, response.liked);
+                        if (!response.liked && $('#like-section').is(':visible')) {
+                            form.parents('.post').remove();
+                        }
+                        loadLikesTab();
+                    },
+                    error: function(error) {
+                        console.error(error);
+                        alert('An error occurred while toggling like.');
+                    }
+                });
+            });
+        }
+
+        $('.setting').on('click', function() {
+            const newNickname = prompt("새 닉네임 입력: ");
+            if(newNickname) {
+                $.ajax({
+                    url: "/user/nickname/update",
+                    type: "POST",
+                    data: JSON.stringify({ nickname: newNickname }),
+                    contentType: 'application/json',
+                    success: function(result) {
+                        $('.text-2xl > span').text(newNickname);
+                    },
+                    error: function() {
+                        alert("닉네임 업데이트 실패.");
+                    }
+                });
+            }
+        });
+
+        $('#image').on('change', function() {
+            let filename = $(this).val().split('\\').pop();
+            $('#fileName').html(filename);
+        });
+        $('.delete-post-form').on('submit', function(e) {
+            e.preventDefault();
+            let postId = $(this).data("post-id");
+
+            $.ajax({
+                url: '/post/delete/' + postId,
+                type: 'POST',
+                success: function() {
+                    $('#post-' + postId).remove();
+                },
+                error: function() {
+                    alert('게시글을 삭제하는 과정에서 에러가 발생했습니다.');
+                }
+            });
+        });
+        $('#post-form').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/post',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    location.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('HTTP status code: ', jqXHR.status);
+                    console.log('textStatus: ', textStatus);
+                    console.log('errorThrown: ', errorThrown);
+                    console.log('jqXHR.responseText: ', jqXHR.responseText);
+                    alert('게시글이 작성되지 않았습니다. 다시 시도해주세요.');
+                }
+            });
+        });
+
+
+        $('.follow-button').on('click', function(e) {
+            e.preventDefault();
+            var username = $('#username').text();
+            $.ajax({
+                url: "/user/follow-toggle/" + username,
+                type: "POST",
+                success: function() {
+                    updateFollowButton();
+                },
+                error: function() {
+                    alert('팔로우 상태를 변경하는데 문제가 생겼습니다.');
+                }
+            });
+        });
+
+        $('#posts-tab').click(function() {
+            $('#post-section').show();
+            $('#like-section').hide();
+            $('#posts-tab').addClass('bg-blue-500 text-white');
+            $('#likes-tab').removeClass('bg-blue-500 text-white');
+        });
+
+        $('#likes-tab').click(function() {
+            $('#like-section').show();
+            $('#post-section').hide();
+            $('#likes-tab').addClass('bg-blue-500 text-white');
+            $('#posts-tab').removeClass('bg-blue-500 text-white');
+        });
+        $(".like-button").click(function() {
+            var postId = $(this).closest('.post').data('id');
+            var self = this;
+
+            $.ajax({
+                url: '/post/toggle-like/' + postId,
+                method: "POST",
+                success: function(response) {
+                    console.log(response); // Add this line to see the response in browser's console
+                    // Update the number of likes
+                    $(self).siblings('.likes-count').html(response.likesCount);
+                    // Update the color of the thumb_up icon
+                    if(response.liked){
+                        $(self).css("color", "red");
+                    }else{
+                        $(self).css("color", "black");
+                    }
+                },
+                error: function(error) {
+                    console.error(error);
+                    alert('An error occurred while toggling like.');
+                }
+            });
+        });
+
+        attachLikeFormSubmitHandler();
+        updateFollowButton();
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>photoleaf_main.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #e8bf6a;}
+.s1 { color: #abb2bf;}
+.s2 { color: #bababa;}
+.s3 { color: #a5c261;}
+.s4 { color: #abb2bf;}
+.s5 { color: #98c36c;}
+.s6 { color: #5c6370;}
+</style>
+</head>
+<body bgcolor="#282c34">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+photoleaf_main.html</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;!DOCTYPE </span><span class="s2">html</span><span class="s0">&gt;</span>
+<span class="s0">&lt;html </span><span class="s2">lang</span><span class="s3">=&quot;ko&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;head&gt;</span>
+    <span class="s0">&lt;meta </span><span class="s2">charset</span><span class="s3">=&quot;UTF-8&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;title&gt;</span><span class="s4">PhotoLeaf</span><span class="s0">&lt;/title&gt;</span>
+    <span class="s0">&lt;link </span><span class="s2">href</span><span class="s3">=&quot;https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css&quot; </span><span class="s2">rel</span><span class="s3">=&quot;stylesheet&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;style&gt;</span>
+        <span class="s0">body </span><span class="s1">{</span>
+            <span class="s2">font-family</span><span class="s4">: </span><span class="s5">'Arial'</span><span class="s1">, </span><span class="s3">sans-serif</span><span class="s1">;</span>
+        <span class="s1">}</span>
+    <span class="s0">&lt;/style&gt;</span>
+<span class="s0">&lt;/head&gt;</span>
+<span class="s0">&lt;body </span><span class="s2">class</span><span class="s3">=&quot;antialiased bg-gray-100 text-gray-800&quot;</span><span class="s0">&gt;</span>
+<span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;container mx-auto&quot;</span><span class="s0">&gt;</span>
+    <span class="s0">&lt;header </span><span class="s2">class</span><span class="s3">=&quot;w-full flex justify-between p-6 bg-blue-500 text-white&quot;</span><span class="s0">&gt;</span>
+        <span class="s0">&lt;h1 </span><span class="s2">class</span><span class="s3">=&quot;font-bold text-3xl&quot;</span><span class="s0">&gt;</span><span class="s4">PhotoLeaf</span><span class="s0">&lt;/h1&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">sec:authorize</span><span class="s3">=&quot;isAuthenticated()&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;p </span><span class="s2">th:text</span><span class="s3">=&quot;${#authentication.name}&quot;</span><span class="s0">&gt;</span><span class="s4">User Name</span><span class="s0">&lt;/p&gt;</span>
+            <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;/logout&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;px-4 py-2 text-sm font-semibold rounded hover:bg-blue-700 hover:text-gray-200 transition duration-200&quot;</span><span class="s0">&gt;</span><span class="s4">로그아웃</span><span class="s0">&lt;/button&gt;</span>
+            <span class="s0">&lt;/a&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;div </span><span class="s2">sec:authorize</span><span class="s3">=&quot;!isAuthenticated()&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;a </span><span class="s2">href</span><span class="s3">=&quot;/login&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;px-4 py-2 text-sm font-semibold rounded hover:bg-blue-700 hover:text-gray-200 transition duration-200&quot;</span><span class="s0">&gt;</span><span class="s4">로그인</span><span class="s0">&lt;/button&gt;</span>
+            <span class="s0">&lt;/a&gt;</span>
+        <span class="s0">&lt;/div&gt;</span>
+    <span class="s0">&lt;/header&gt;</span>
+
+    <span class="s0">&lt;main </span><span class="s2">class</span><span class="s3">=&quot;flex mt-10&quot;</span><span class="s0">&gt;</span>
+        <span class="s6">&lt;!-- Sidebar --&gt;</span>
+        <span class="s0">&lt;aside </span><span class="s2">class</span><span class="s3">=&quot;w-60 flex flex-col space-y-8 p-4 bg-white border-r rounded-lg shadow-lg&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;h2 </span><span class="s2">class</span><span class="s3">=&quot;text-lg font-semibold text-gray-700&quot;</span><span class="s0">&gt;</span><span class="s4">Menu</span><span class="s0">&lt;/h2&gt;</span>
+            <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;flex items-center space-x-2 text-blue-500 hover:bg-gray-100 rounded p-2&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+                <span class="s0">&lt;svg </span><span class="s2">class</span><span class="s3">=&quot;h-6 w-6 fill-current&quot; </span><span class="s2">viewBox</span><span class="s3">=&quot;0 0 20 20&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;path </span><span class="s2">d</span><span class="s3">=&quot;M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10&quot;</span><span class="s0">/&gt;</span>
+                <span class="s0">&lt;/svg&gt;</span>
+                <span class="s0">&lt;span </span><span class="s2">class</span><span class="s3">=&quot;text-sm&quot;</span><span class="s0">&gt;</span><span class="s4">홈</span><span class="s0">&lt;/span&gt;</span>
+            <span class="s0">&lt;/button&gt;</span>
+            <span class="s0">&lt;a </span><span class="s2">th:href</span><span class="s3">=&quot;@{'/profile/' + ${#authentication.name}}&quot; </span><span class="s2">class</span><span class="s3">=&quot;text-sm&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;button </span><span class="s2">class</span><span class="s3">=&quot;flex items-center space-x-2 text-blue-500 hover:bg-gray-100 rounded p-2&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;svg </span><span class="s2">xmlns</span><span class="s3">=&quot;http://www.w3.org/2000/svg&quot; </span><span class="s2">fill</span><span class="s3">=&quot;none&quot; </span><span class="s2">viewBox</span><span class="s3">=&quot;0 0 24 24&quot; </span><span class="s2">stroke</span><span class="s3">=&quot;currentColor&quot; </span><span class="s2">class</span><span class="s3">=&quot;h-6 w-6&quot;</span><span class="s0">&gt;</span>
+                    <span class="s0">&lt;path </span><span class="s2">stroke-linecap</span><span class="s3">=&quot;round&quot; </span><span class="s2">stroke-linejoin</span><span class="s3">=&quot;round&quot; </span><span class="s2">stroke-width</span><span class="s3">=&quot;2&quot; </span><span class="s2">d</span><span class="s3">=&quot;M4 4v16h16V4H4zm8 9l6-6M6 12l6-6&quot;</span><span class="s0">&gt;&lt;/path&gt;</span>
+                <span class="s0">&lt;/svg&gt;</span>
+                <span class="s4">프로필</span>
+            <span class="s0">&lt;/button&gt;</span>
+            <span class="s0">&lt;/a&gt;</span>
+        <span class="s0">&lt;/aside&gt;</span>
+
+        <span class="s6">&lt;!-- Main content --&gt;</span>
+        <span class="s0">&lt;section </span><span class="s2">class</span><span class="s3">=&quot;flex-1 ml-4 space-y-8&quot;</span><span class="s0">&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;p-4 border rounded-lg shadow-lg bg-white&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;h2 </span><span class="s2">class</span><span class="s3">=&quot;text-lg font-semibold mb-2&quot;</span><span class="s0">&gt;</span><span class="s4">팔로잉</span><span class="s0">&lt;/h2&gt;</span>
+                <span class="s6">&lt;!-- Posts --&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+            <span class="s0">&lt;div </span><span class="s2">class</span><span class="s3">=&quot;p-4 border rounded-lg shadow-lg bg-white&quot;</span><span class="s0">&gt;</span>
+                <span class="s0">&lt;h2 </span><span class="s2">class</span><span class="s3">=&quot;text-lg font-semibold mb-2&quot;</span><span class="s0">&gt;</span><span class="s4">좋아요 랭킹</span><span class="s0">&lt;/h2&gt;</span>
+                <span class="s6">&lt;!-- Posts --&gt;</span>
+            <span class="s0">&lt;/div&gt;</span>
+        <span class="s0">&lt;/section&gt;</span>
+    <span class="s0">&lt;/main&gt;</span>
+<span class="s0">&lt;/div&gt;</span>
+<span class="s0">&lt;/body&gt;</span>
+<span class="s0">&lt;/html&gt;</span></pre>
+</body>
+</html>
